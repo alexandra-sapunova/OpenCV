@@ -91,3 +91,30 @@ def print_cam():
 
     cap.release()
     cv2.destroyAllWindows()
+
+
+# task 6
+def phone_camera():
+    video = cv2.VideoCapture(1)
+
+    w = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+    h = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    video_writer = cv2.VideoWriter("output2.mov", fourcc, 25, (w, h))
+
+    while True:
+        rez, img = video.read()
+        cv2.imshow('Camera', img)
+        video_writer.write(img)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+        # cv2.destroyAllWindows()
+        # cv2.waitKey(0)
+
+    video.release()
+    cv2.destroyAllWindows()
+
+# read_photo()
+phone_camera()
