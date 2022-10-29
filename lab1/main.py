@@ -35,3 +35,25 @@ def read_video():
 
     cap.release()
     cv2.destroyAllWindows()
+
+
+# task 4
+def read_video_write_to_file():
+    video = cv2.VideoCapture(r'C:\Users\aleks\Downloads\Остров сокровищ мем  Доктор Ливси мем. Dr. livesey meme 4k..mp4', cv2.CAP_ANY)
+
+    w = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+    h = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    video_writer = cv2.VideoWriter("output.mov", fourcc, 25, (w, h))
+
+    while True:
+        ok, img = video.read()
+        if not ok:
+            break
+
+        video_writer.write(img)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    video.release()
+    cv2.destroyAllWindows()
